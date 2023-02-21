@@ -10,4 +10,8 @@ DB와 연동하여 저장성공
 ## 잘 안된 점
 
 ![image](https://user-images.githubusercontent.com/94429120/220397418-7dc2307d-4f30-4736-8e67-a74c26495245.png)
-thymeleaf 문법이 적용이 안된건지 findAll 메소드가 제대로 작동이 안되는지 (제 생각은 thymeleaf 문법이 적용이 안된거같지만) 출력이 안되고 있음
+<br>
+thymeleaf 문법이 적용이 안된건지 findAll 메소드가 제대로 작동이 안되는지 
+<br>(제 생각은 thymeleaf 문법이 적용이 안된거같지만)
+<br>출력이 안되고 있음 제 생각대로라면 밑에 주루룩 나와야함
+<br>
