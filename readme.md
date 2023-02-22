@@ -9,8 +9,9 @@
 ![image](https://user-images.githubusercontent.com/94429120/220656078-50fedec3-07d4-4356-9c8e-7673443f7805.png)
 <br>
 ### 게시물 삭제
-<br>
-![image](https://user-images.githubusercontent.com/94429120/220656522-e9469e1e-11d2-4e58-93c8-4155ad3eba14.png) please any text 클릭하면 삭제
+![image](https://user-images.githubusercontent.com/94429120/220656870-d37314ac-6dad-464d-8c2b-edb3018f431b.png)
+
+please any text 클릭하면 삭제
 
 ## 잘 안된 점
 
