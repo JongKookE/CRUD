@@ -3,9 +3,14 @@
 
 ## 진행상황
 
+### DB와 연동하여 저장성공<br>
 ![image](https://user-images.githubusercontent.com/94429120/220396667-30657674-d57c-4b0c-9e3c-629b2ab681ca.png)     ----------->       ![image](https://user-images.githubusercontent.com/94429120/220396794-af9e772d-f6f8-4969-b54a-bcb62e767d62.png)
-
-DB와 연동하여 저장성공
+### 게시물 출력
+![image](https://user-images.githubusercontent.com/94429120/220656078-50fedec3-07d4-4356-9c8e-7673443f7805.png)
+<br>
+### 게시물 삭제
+<br>
+![image](https://user-images.githubusercontent.com/94429120/220656522-e9469e1e-11d2-4e58-93c8-4155ad3eba14.png) please any text 클릭하면 삭제
 
 ## 잘 안된 점
 
