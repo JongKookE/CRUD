@@ -4,9 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.board.entity.Board;
 import com.example.board.service.BoardService;
@@ -19,13 +17,6 @@ public class BoardController {
 
     @GetMapping("/write")
     public String showMain(){                
-        return "boardwrite";
-    }
-
-    @RequestMapping("/write/{num}")
-    public String showMain(@PathVariable int num, Model model){
-        int res = num;
-        model.addAttribute("str", "num : " + res);
         return "boardwrite";
     }
 
@@ -43,12 +34,16 @@ public class BoardController {
         model.addAttribute("list", boardService.BoardList());
         return "boardlist";
     }
-    
-    @GetMapping("/test")
-    public String testThymeleaf(Model model){
-        model.addAttribute("test", "I'm JongKook");
-        return "test";
+
+    @GetMapping("/board/view")
+    public String boardView(Model model, Integer id){
+        model.addAttribute("board", boardService.boardView(id));
+        return "boardview";
     }
 
-
+    @GetMapping("board/delete")
+    public String boardDelete(Integer id){
+        boardService.boardDelete(id);
+        return "redirect:/board/list";
+    }
 }

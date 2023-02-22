@@ -20,4 +20,13 @@ public class BoardService {
     public List<Board> BoardList(){
         return boardRepository.findAll();
     }
+
+    // 특정 게시글 불러오기
+    public Board boardView(Integer id){
+        return boardRepository.findById(id).get();
+    }
+
+    public void boardDelete(Integer id){
+        boardRepository.deleteById(id);
+    }
 }
