@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.board.entity.Board;
 import com.example.board.service.BoardService;
@@ -22,12 +23,14 @@ public class BoardController {
     }
 
     @PostMapping("/board/writeProcessing")
-    public String BoardWriteProcessing(Board board, Model model){
+    public String BoardWriteProcessing(Board board, Model model, MultipartFile file) throws Exception{
         model.addAttribute("takeThis", board.getTitle());
         System.out.println("제목 : " + board.getTitle());
         System.out.println("내용 : " + board.getContent());
-        boardService.write(board);
-        return "takethis";
+        boardService.write(board, file);
+        model.addAttribute("message", "글 작성이 완료 되었습니다.");
+        model.addAttribute("searchUrl", "/board/list");
+        return "message";
     }
 
     @GetMapping("/board/list")
@@ -55,11 +58,11 @@ public class BoardController {
     }
  
     @PostMapping("/board/update/{id}")
-    public String boardUpdate(@PathVariable("id") Integer id, Board board){
+    public String boardUpdate(@PathVariable("id") Integer id, Board board, MultipartFile file) throws Exception{
         Board boardTemp = boardService.boardView(id);
         boardTemp.setTitle(board.getTitle());
         boardTemp.setContent(board.getContent());
-        boardService.write(boardTemp);
+        boardService.write(boardTemp, file);
         return "redirect:/board/list";
     }
 }

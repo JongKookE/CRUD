@@ -12,6 +12,24 @@ public class Board {
     private Integer id;
     private String title;
     private String content;
+    private String filename;
+    private String filepath;
+
+    public String getFilename() {
+        return this.filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
+    }
+
+    public String getFilepath() {
+        return this.filepath;
+    }
+
+    public void setFilepath(String filepath) {
+        this.filepath = filepath;
+    }
 
     public Integer getId() {
         return this.id;

@@ -25,11 +25,12 @@
     <h1 style = "right : 50%" >PLEASE WRITE TITLE AND CONTENT</h1>
     <p th:text = '${str}'></p>
     <div class = 'layout'>
-        <form action = "/board/writeProcessing" method = "post">
-            <input type = 'text' name = 'title'>
+        <form action = "/board/writeProcessing" method = "post" enctype="multipart/form-data">
+            <input type = 'text' name = 'title'>            
             <textarea name = 'content'></textarea>
+            <input type = "file" name = "file">
             <button type = 'submit'>Submit!</button>
-            <p th : text = "${str}">원래 안나오나?</p>
+            
         </form>
     </div>
     
