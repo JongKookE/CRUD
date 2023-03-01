@@ -53,10 +53,9 @@ public class BoardController {
         model.addAttribute("board", boardService.boardView(id));
         return "boardmodify";
     }
-
+ 
     @PostMapping("/board/update/{id}")
     public String boardUpdate(@PathVariable("id") Integer id, Board board){
-
         Board boardTemp = boardService.boardView(id);
         boardTemp.setTitle(board.getTitle());
         boardTemp.setContent(board.getContent());
