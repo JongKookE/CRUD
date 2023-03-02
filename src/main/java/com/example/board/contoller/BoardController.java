@@ -1,6 +1,10 @@
 package com.example.board.contoller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,8 +38,16 @@ public class BoardController {
     }
 
     @GetMapping("/board/list")
-    public String boardList(Model model){
-        model.addAttribute("list", boardService.BoardList());
+    public String boardList(Model model, @PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable page){
+        Page<Board> list = boardService.BoardList(page);
+                                                            // Pageable 인터페이스는 0부터 시작하기 때문에 첫번째 페이지를 1로 만들어줘야한다.
+        int nowPage = list.getPageable().getPageNumber() + 1;   // page.getPageNumber(); 동일
+        int startPage = Math.max(nowPage - 4, 1);
+        int endPage = Math.min(nowPage + 5, list.getTotalPages());
+        model.addAttribute("nowPage", nowPage);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+        model.addAttribute("list", boardService.BoardList(page));
         return "boardlist";
     }
 
