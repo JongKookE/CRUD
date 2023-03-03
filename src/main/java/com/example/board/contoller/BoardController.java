@@ -38,16 +38,24 @@ public class BoardController {
     }
 
     @GetMapping("/board/list")
-    public String boardList(Model model, @PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable page){
-        Page<Board> list = boardService.BoardList(page);
-                                                            // Pageable 인터페이스는 0부터 시작하기 때문에 첫번째 페이지를 1로 만들어줘야한다.
+    public String boardList(Model model, 
+                            @PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
+                            String searchKeyword){
+        Page<Board> list = null;
+        if(searchKeyword == null)
+            list = boardService.BoardList(pageable);
+        else
+            list = boardService.boardSearchList(searchKeyword, pageable);
+        
+        System.out.println(searchKeyword);
+                                                                // Pageable 인터페이스는 0부터 시작하기 때문에 첫번째 페이지를 1로 만들어줘야한다.
         int nowPage = list.getPageable().getPageNumber() + 1;   // page.getPageNumber(); 동일
         int startPage = Math.max(nowPage - 4, 1);
         int endPage = Math.min(nowPage + 5, list.getTotalPages());
         model.addAttribute("nowPage", nowPage);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
-        model.addAttribute("list", boardService.BoardList(page));
+        model.addAttribute("list", boardService.BoardList(pageable));
         return "boardlist";
     }
 
