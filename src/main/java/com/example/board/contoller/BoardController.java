@@ -1,5 +1,7 @@
 package com.example.board.contoller;
 
+import java.util.Objects;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.board.entity.Board;
@@ -39,23 +42,26 @@ public class BoardController {
 
     @GetMapping("/board/list")
     public String boardList(Model model, 
-                            @PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
-                            String searchKeyword){
+                            @PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable, 
+                            @RequestParam(name = "searchKeyword", required = false) String searchKeyword){
         Page<Board> list = null;
-        if(searchKeyword == null)
+        if(searchKeyword == null){
             list = boardService.BoardList(pageable);
-        else
+        }else{
             list = boardService.boardSearchList(searchKeyword, pageable);
-        
-        System.out.println(searchKeyword);
-                                                                // Pageable 인터페이스는 0부터 시작하기 때문에 첫번째 페이지를 1로 만들어줘야한다.
-        int nowPage = list.getPageable().getPageNumber() + 1;   // page.getPageNumber(); 동일
+        }
+                
+        // Pageable 인터페이스는 0부터 시작하기 때문에 첫번째 페이지를 1로 만들어줘야한다.
+         // page.getPageNumber(); 동일
+        int nowPage = list.getPageable().getPageNumber() + 1;  
         int startPage = Math.max(nowPage - 4, 1);
         int endPage = Math.min(nowPage + 5, list.getTotalPages());
         model.addAttribute("nowPage", nowPage);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
-        model.addAttribute("list", boardService.BoardList(pageable));
+        //검색이 안되었던 이유 -> searchKeyword 값에 따라 list가 변하는데 밑의 라인에서 list를 받아오지 않고
+        //BoardService.BoardList를 받아오니까 검색이 안되고 첫번째 페이지로 넘어갔었음
+        model.addAttribute("list", list);        
         return "boardlist";
     }
 
