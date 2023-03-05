@@ -1,15 +1,15 @@
 package com.example.board.service;
 
 import java.io.File;
-import java.util.List;
 import java.util.UUID;
 
-import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.board.entity.Board;
@@ -36,8 +36,13 @@ public class BoardService {
     }
 
     // 특정 게시글 불러오기
+    @Transactional
     public Board boardView(Integer id){
-        return boardRepository.findById(id).get();
+        //HttpServletRequest request
+        //Cookie[] cookie = request.getCookies();
+        Board board = boardRepository.findById(id).get();
+        board.setViewCount(board.getViewCount() + 1);
+        return board;
     }
 
     public void boardDelete(Integer id){

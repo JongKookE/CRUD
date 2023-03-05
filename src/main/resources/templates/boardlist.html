@@ -12,7 +12,8 @@
             <thead>
                 <tr>
                     <th>글 번호</th>
-                    <th>제목</th>                    
+                    <th>제목</th>   
+                    <th>조회수</th>                 
                 </tr>
             </thead>
             <tbody>
@@ -20,21 +21,25 @@
                     <td th:text = ${board.id}></td>
                     <td>
                         <a th:text = ${board.title} th:href = "@{/board/view(id=${board.id})}"></a>
-                    </td>                    
+                    </td>               
+                    <td th:text="${board.viewCount}"></td>
                 </tr>
             </tbody>
         </table>
 
         <th:block th:each = "page : ${#numbers.sequence(startPage, endPage)}">
-            <a th:if="${page != nowPage}" th:href="@{/board/list(page=${page - 1},searchKeyword=${param.searchKeyword})}" th:text="${page}"></a>
+            <!-- searchKeyword=${param.searchKeyword})} Controller에서 RequestParam의 값을 param.searchKeyword로 가져올 수 있음  -->
+            <a th:if="${page != nowPage}" th:href="@{/board/list(page=${page - 1},
+            searchKeyword=${param.searchKeyword})}" th:text="${page}"></a>
 
             <strong th:if = "${page == nowPage}"  th:text = "${page}" style = "color : red"></strong>
         </th:block>
         <form th:action = "@{/board/list}" method = "get">
             <input type = "text" name = "searchKeyword">
-            <input type = "submit" value = "검색">
-
+            <input type = "submit" value = "검색">            
         </form>
+        <!-- 일반적으로 href는 a 태그에서 사용되고 버튼으로 경로 이동을 하고 싶다면 location.href를 사용해야함 -->
+        <button onclick = "location.href='/write'">글 쓰기</button>
     </div>
 </body>
 </html>

@@ -25,7 +25,7 @@ public class BoardController {
     private BoardService boardService;
 
     @GetMapping("/write")
-    public String showMain(){                
+    public String showMain(Model model){                        
         return "boardwrite";
     }
 
@@ -61,6 +61,7 @@ public class BoardController {
         model.addAttribute("endPage", endPage);
         //검색이 안되었던 이유 -> searchKeyword 값에 따라 list가 변하는데 밑의 라인에서 list를 받아오지 않고
         //BoardService.BoardList를 받아오니까 검색이 안되고 첫번째 페이지로 넘어갔었음
+        model.addAttribute("list", boardService.BoardList(pageable));        
         model.addAttribute("list", list);        
         return "boardlist";
     }
