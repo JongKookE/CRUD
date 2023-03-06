@@ -4,6 +4,7 @@
 ## 03-06
 ![image](https://user-images.githubusercontent.com/94429120/223067858-e5e1c314-e03a-45fc-87c5-acb1a03a5efc.png)
 ![image](https://user-images.githubusercontent.com/94429120/223067892-b38df8d1-c0e2-422d-941c-78468ed97f31.png)
+<br>
 @Transaction을 이용해서 변경감지를 이용해서 조회수를 구현했지만 F5등 한 사람이 중복해서 올릴수있는 등 다양한 문제점이 있음
 <br>
 Cookie를 통해 보완할 예정
