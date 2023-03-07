@@ -1,6 +1,14 @@
 # 스프링을 이용하여 기본적인 CRUD 게시판 만들기 
 말 그대로 무작성 실습을 해서 손에 익히기
 
+## 03-07
+![image](https://user-images.githubusercontent.com/94429120/223430595-a6193663-9a5e-4824-819b-c2498453afed.png)
+<br>
+입력 값 제한하기
+
+## 수정 페이지 동작 장애 수정
+
+
 ## 03-06
 ![image](https://user-images.githubusercontent.com/94429120/223067858-e5e1c314-e03a-45fc-87c5-acb1a03a5efc.png)
 ![image](https://user-images.githubusercontent.com/94429120/223067892-b38df8d1-c0e2-422d-941c-78468ed97f31.png)
