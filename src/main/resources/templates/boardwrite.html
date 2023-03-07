@@ -22,15 +22,15 @@
     }
 </style>
 <body>
-    <h1 style = "right : 50%" >PLEASE WRITE TITLE AND CONTENT</h1>
-    <p th:text = '${str}'></p>
+    <h1 style = "right : 50%" >PLEASE WRITE TITLE AND CONTENT</h1>    
     <div class = 'layout'>
-        <form action = "/board/writeProcessing" method = "post" enctype="multipart/form-data">
-            <input type = 'text' name = 'title'>            
-            <textarea name = 'content'></textarea>
+        <form name = "board" action = "/board/writeProcessing" method = "post" enctype="multipart/form-data" th:object = "${board}">
+            <input type = 'text' name = 'title' id = "title" th:field="*{title}"> 
+            <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title error!</span>           
+            <textarea name = 'content' id = "content" th:field="*{content}"></textarea>
+            <span th:if="${#fields.hasErrors('content')}" th:errors="*{content}">Content error!</span>
             <input type = "file" name = "file">
-            <button type = 'submit'>Submit!</button>
-            
+            <button type = 'submit'>Submit!</button>            
         </form>
     </div>
     

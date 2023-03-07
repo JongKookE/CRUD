@@ -21,13 +21,19 @@ public class BoardService {
     private BoardRepository boardRepository;
 
     public void write(Board board, MultipartFile file) throws Exception{
-        String path = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files"; 
-        UUID uuid = UUID.randomUUID();
-        String fileName = uuid + "_" +file.getOriginalFilename();
-        File saveFile = new File(path, fileName);
-        file.transferTo(saveFile);
-        board.setFilename(fileName);
-        board.setFilepath("/files/" + fileName);
+        if (file != null) {
+            String path = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files"; 
+            UUID uuid = UUID.randomUUID();
+            String fileName = uuid + "_" +file.getOriginalFilename();
+            File saveFile = new File(path, fileName);
+            file.transferTo(saveFile);
+            board.setFilename(fileName);
+            board.setFilepath("/files/" + fileName);
+        }
+        else{
+            board.setFilename(null);
+            board.setFilepath(null);
+        }
         boardRepository.save(board);
     }
 

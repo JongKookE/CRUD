@@ -1,6 +1,6 @@
 package com.example.board.contoller;
 
-import java.util.Objects;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,16 +25,33 @@ public class BoardController {
     @Autowired
     private BoardService boardService;
 
+    @GetMapping("/")
+    public String goToMain(){
+        return "boardmain";
+    }
     @GetMapping("/write")
-    public String showMain(Model model){                        
+    public String showMain(Board board, Model model){
+        model.addAttribute("board", new Board());
         return "boardwrite";
     }
 
+    // @PostMapping("/board/writeProcessing")
+    // public String checkBoard(@Valid Board board, BindingResult bindingResult) {
+
+	// 	if (bindingResult.hasErrors()) {
+	// 		return "boardwrite";
+	// 	}
+	// 	return "redirect:/write";
+	    
+    // }
+
     @PostMapping("/board/writeProcessing")
-    public String BoardWriteProcessing(Board board, Model model, MultipartFile file) throws Exception{
-        model.addAttribute("takeThis", board.getTitle());
+    public String BoardWriteProcessing(@Valid Board board, BindingResult bindingResult, Model model, MultipartFile file) throws Exception{
         System.out.println("제목 : " + board.getTitle());
         System.out.println("내용 : " + board.getContent());
+        if (bindingResult.hasErrors()) 
+			return "boardwrite";
+		
         boardService.write(board, file);
         model.addAttribute("message", "글 작성이 완료 되었습니다.");
         model.addAttribute("searchUrl", "/board/list");
