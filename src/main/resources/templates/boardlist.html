@@ -4,9 +4,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "import" href = "header.html">
     <title>목록 출력</title>
 </head>
+<header>
+    <h1>My Website</h1>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+      </ul>
+    </nav>
+</header>
 <body>
+    
     <div class = 'layout'>
         <table>
             <thead>
@@ -23,6 +33,9 @@
                         <a th:text = ${board.title} th:href = "@{/board/view(id=${board.id})}"></a>
                     </td>               
                     <td th:text="${board.viewCount}"></td>
+                    <td>
+                        <a th:href = "@{/board/delete(id=${board.id})}">DELETE!</a>
+                    </td>
                 </tr>
             </tbody>
         </table>
