@@ -26,8 +26,10 @@ public class BoardController {
     private BoardService boardService;
 
     @GetMapping("/")
-    public String goToMain(){
-        return "boardmain";
+    public String goToMain(Model model){
+        String mp3Path = "C:\\java_workspace\\board\\src\\main\\resources\\templates\\JUKJAE.mp3";    
+        model.addAttribute("mp3Path", mp3Path);
+        return "boardmain";        
     }
     @GetMapping("/write")
     public String showMain(Board board, Model model){
@@ -109,5 +111,5 @@ public class BoardController {
         boardTemp.setContent(board.getContent());
         boardService.write(boardTemp, file);
         return "redirect:/board/list";
-    }
+    }    
 }

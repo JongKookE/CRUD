@@ -10,5 +10,12 @@
     <h1>Main Page 꾸미기~</h1>
     <button onclick="location.href='/board/list'">리스트 출력</button>
     <button onclick = "location.href = '/write'">글 쓰기</button>
+
+    <h3>적재 - 손을 잡는다거나, 같이 걷는다거나</h3>
+    <a>audio 태그를 이용한 재생</a>
+    <br>
+    <audio controls id="audio-player">
+        <source th:attr="src=${mp3Path}" type="audio/mpeg">
+      </audio>
 </body>
 </html>
